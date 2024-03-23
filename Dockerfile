@@ -34,3 +34,12 @@ USER myuser
 RUN mkdir /home/myuser/code
 WORKDIR /home/myuser/code
 COPY . .
+
+# make sure all messages always reach console
+ENV PYTHONUNBUFFERED=1
+
+# activate virtual environment
+ENV VIRTUAL_ENV=/home/myuser/venv
+ENV PATH="/home/myuser/venv/bin:$PATH"
+
+CMD ["mpf","both","-x" ]
