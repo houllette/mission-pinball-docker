@@ -1,0 +1,72 @@
+#config_version=6
+
+hardware:
+  driverboards: virtual
+  platform: smart_virtual
+
+dmds:
+  dmd:
+    shades: 16
+    fps: 24
+
+config:
+- hardware.yaml
+- shots.yaml
+- keyboard.yaml
+
+smart_virtual:
+  file_log: full
+
+mpf:
+  default_pulse_ms: 20
+  report_crashes: never
+
+game:
+  balls_per_game: 3
+  max_players: 4
+
+modes:
+- base
+- claw_lit_for_major_mode
+- mode1_acmag
+- skillshot
+- bonus
+- high_score
+- tilt
+- service
+#  - credits
+
+custom_code:
+  code.claw.Claw
+
+widget_styles:
+  text_default:
+    font_name: Quadrit
+    font_size: 10
+    adjust_top: 2
+    adjust_bottom: 3
+  space_title_huge:
+    font_name: DEADJIM
+    font_size: 29
+    antialias: true
+    adjust_top: 3
+    adjust_bottom: 3
+  space_title:
+    font_name: DEADJIM
+    font_size: 21
+    antialias: true
+    adjust_top: 2
+    adjust_bottom: 3
+  medium:
+    font_name: pixelmix
+    font_size: 8
+    adjust_top: 1
+    adjust_bottom: 1
+  small:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+  tall_title:
+    font_name: big_noodle_titling
+    font_size: 20

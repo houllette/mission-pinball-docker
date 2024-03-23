@@ -1,0 +1,42 @@
+#config_version=6
+mode_settings:
+  keep_multiplier: True
+  display_delay_ms: 500
+  bonus_entries:
+      - event: bonus_ramps
+        score: 10000
+        player_score_entry: ramps
+        reset_player_score_entry: True
+      - event: bonus_modes
+        score: 50000
+        player_score_entry: modes
+        reset_player_score_entry: False
+
+slide_player:
+  bonus_start: slide_6
+  bonus_ramps: slide_7
+  bonus_modes: slide_8
+  bonus_subtotal: slide_9
+  bonus_multiplier: slide_10
+  bonus_total: slide_11
+slides:
+  slide_6:
+  - type: text
+    text: END OF BALL BONUS
+  slide_7:
+  - type: text
+    text: 'RAMPS: (score)'
+  slide_8:
+  - type: text
+    text: 'MODES: (score)'
+  slide_9:
+  - type: text
+    text: 'BONUS SCORE: (score)'
+    number_grouping: true
+  slide_10:
+  - type: text
+    text: (multiplier)X
+  slide_11:
+  - type: text
+    text: 'TOTAL BONUS: (score)'
+    number_grouping: true

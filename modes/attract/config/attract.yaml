@@ -1,0 +1,74 @@
+#config_version=6
+show_player:
+  mode_attract_started:
+    attract_dmd_loop:
+      loops: -1
+      speed: 1
+    multiball_sweep:
+      loops: -1
+      speed: 10
+    random_flashing:
+      loops: -1
+      speed: 6
+    freeze_sweep:
+      loops: -1
+      speed: 9
+    car_crash_sweep:
+      loops: -1
+      speed: 7
+    middle_circle_sweep:
+      loops: -1
+      speed: 12
+    right_orbit_sweep:
+      loops: -1
+      speed: 12
+    standup_sweep:
+      loops: -1
+      speed: 5
+    center_red_sweep:
+      loops: -1
+      speed: 4
+    center_ramp_sweep:
+      loops: -1
+      speed: 7
+    top_lanes_sweep:
+      loops: -1
+      speed: 4
+    claw_cycle:
+      loops: -1
+      speed: 9
+    inlane_alternate:
+      loops: -1
+      speed: 8
+    gi_on:
+      loops: 0
+  mode_attract_stopped:
+    attract_dmd_loop:
+      action: stop
+
+    multiball_sweep:
+      action: stop
+    random_flashing:
+      action: stop
+    freeze_sweep:
+      action: stop
+    car_crash_sweep:
+      action: stop
+    middle_circle_sweep:
+      action: stop
+    right_orbit_sweep:
+      action: stop
+    standup_sweep:
+      action: stop
+    center_red_sweep:
+      action: stop
+    center_ramp_sweep:
+      action: stop
+    top_lanes_sweep:
+      action: stop
+    claw_cycle:
+      action: stop
+    inlane_alternate:
+      action: stop
+    flashers:
+      action: stop

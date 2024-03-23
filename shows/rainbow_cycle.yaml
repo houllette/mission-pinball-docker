@@ -1,0 +1,26 @@
+#show_version=6
+- time: 0
+  lights:
+    red: ff
+    purple: 0
+- time: '+1'
+  lights:
+    orange: ff
+    red: 0
+- time: '+1'
+  lights:
+    yellow: ff
+    orange: 0
+- time: '+1'
+  lights:
+    green: ff
+    yellow: 0
+- time: '+1'
+  lights:
+    blue: ff
+    green: 0
+- time: '+1'
+  lights:
+    purple: ff
+    blue: 0
+- time: '+1'
