@@ -1,45 +1,50 @@
-# using ubuntu LTS version
-FROM ubuntu:22.04 AS builder-image
+# Using the official Python slim image
+FROM python:3.11-slim AS builder-image
 
-# avoid stuck build due to user prompt
-ARG DEBIAN_FRONTEND=noninteractive
+# Set the working directory
+WORKDIR /home/myuser
 
-RUN apt-get update && apt-get install --no-install-recommends -y python3.11 python3.11-dev python3.11-venv python3-pip python3-wheel build-essential && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    build-essential libssl-dev libffi-dev libgrpc-dev \
+    gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav \
+    libgstreamer1.0-dev libsdl2-dev libsdl2-mixer-dev \
+    libsdl2-ttf-dev libsdl2-image-dev libpango1.0-dev libpangocairo-1.0-0 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# create and activate virtual environment
-# using final folder name to avoid path issues with packages
-RUN python3.11 -m venv /home/myuser/venv
+# Create and activate virtual environment
+RUN python3 -m venv venv
 ENV PATH="/home/myuser/venv/bin:$PATH"
 
+# Install Python dependencies
+RUN pip3 install --no-cache-dir --upgrade pip
+RUN pip3 install --no-cache-dir wheel setuptools pillow Cython==0.29.36
+RUN pip3 install --no-cache-dir mpf==0.57.0 mpf-mc==0.57.0 mpf-monitor==0.57.0
+RUN pip3 install --no-cache-dir --force-reinstall -Iv grpcio==1.62.1
 
-# install requirements
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir wheel
-RUN pip3 install --no-cache-dir setuptools
-RUN pip3 install --no-cache-dir pillow
-RUN pip3 install --no-cache-dir mpf[all]
-RUN pip3 install --no-cache-dir mpf-mc
-RUN pip3 install --no-cache-dir mpf-monitor
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Runner image
+FROM python:3.11-slim AS runner-image
 
-FROM ubuntu:22.04 AS runner-image
-RUN apt-get update && apt-get install --no-install-recommends -y python3.11 python3-venv && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install runtime dependencies
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    libsdl2-2.0-0 libsdl2-mixer-2.0-0 libsdl2-ttf-2.0-0 \
+    libsdl2-image-2.0-0 libpango1.0-0 libpangocairo-1.0-0 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Create a user and copy the virtual environment from the builder image
 RUN useradd --create-home myuser
 COPY --from=builder-image /home/myuser/venv /home/myuser/venv
 
+# Set user and working directory
 USER myuser
-RUN mkdir /home/myuser/code
 WORKDIR /home/myuser/code
 COPY . .
 
-# make sure all messages always reach console
+# Set environment variables
 ENV PYTHONUNBUFFERED=1
-
-# activate virtual environment
 ENV VIRTUAL_ENV=/home/myuser/venv
 ENV PATH="/home/myuser/venv/bin:$PATH"
 
-CMD ["mpf","both","-x" ]
+# Set the default command
+CMD ["mpf", "--version"]
