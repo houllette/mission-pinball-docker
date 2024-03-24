@@ -20,6 +20,7 @@ ENV PATH="/home/myuser/venv/bin:$PATH"
 # Install Python dependencies
 RUN pip3 install --no-cache-dir --upgrade pip
 RUN pip3 install --no-cache-dir wheel setuptools pillow Cython==0.29.36
+RUN pip3 install --no-cache-dir uvloop
 RUN pip3 install --no-cache-dir mpf==0.57.0 mpf-mc==0.57.0 mpf-monitor==0.57.0
 RUN pip3 install --no-cache-dir --force-reinstall -Iv grpcio==1.62.1
 
@@ -46,5 +47,9 @@ ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/home/myuser/venv
 ENV PATH="/home/myuser/venv/bin:$PATH"
 
+# Build MPF Production bundle
+RUN mpf build production_bundle
+
 # Set the default command
 CMD ["mpf", "--version"]
+#CMD ["mpf", "game", "-P", "-t"]
