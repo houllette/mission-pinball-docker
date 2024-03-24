@@ -1,0 +1,41 @@
+#config_version=6
+mode:
+  start_events: start_mode1_acmag
+  stop_events: timer_mode_countdown_complete
+  priority: 300
+
+timers:
+  mode_countdown:
+    start_value: 5
+    end_value: 0
+    direction: down
+    start_running: true
+    bcp: true
+
+slide_player:
+  timer_mode_countdown_tick: slide_19
+slides:
+  slide_19:
+  - type: text
+    text: 'COUNTDOWN: %ticks'
+    style: small
+    anchor_y: bottom
+    y: bottom
+  - type: text
+    text: SHOOT THE LEFT RAMP
+    animations:
+      entrance:
+      - property: opacity
+        value: 1
+        duration: 0.3s
+      - property: opacity
+        value: 0
+        duration: 0.3s
+        repeat: true
+show_player:
+  mode_mode1_acmag_started:
+    flash:
+      show_tokens:
+        lights: l_left_ramp_arrow
+      speed: 4
+      loops: -1

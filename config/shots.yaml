@@ -1,0 +1,17 @@
+#config_version=6
+sequence_shots:
+  left_orbit:
+    switch_sequence: s_upper_left_flipper_gate, s_left_loop
+    sequence_timeout: 3s
+  left_ramp:
+    switch_sequence: s_left_ramp_enter, s_left_ramp_exit
+    sequence_timeout: 3s
+  side_ramp:
+    switch_sequence: s_side_ramp_enter, s_side_ramp_exit
+    sequence_timeout: 3s
+  right_ramp:
+    switch_sequence: s_right_ramp_enter, s_right_ramp_exit
+    sequence_timeout: 3s
+  right_orbit:
+    switch_sequence: s_right_freeway, s_left_loop, s_upper_left_flipper_gate
+    sequence_timeout: 3s
